@@ -1,26 +1,80 @@
-@import "tailwindcss";
+/*
+|--------------------------------------------------------------------------
+| Custom Styles for Nexus Digital - Data Green Theme
+|--------------------------------------------------------------------------
+|
+| This file contains the custom CSS necessary to implement the dark theme,
+| dynamic background, and the primary accent color (#68CC4B).
+| Tailwind CSS classes are assumed to be available and are not included here.
+*/
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* 1. Base Styling for the App (Assumes this is applied to a root element or body in your layout) */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    /* Very dark background, similar to the image's overall theme */
+    background-color: #0d1117; 
+    color: #e5e7eb; /* Light gray text */
+    overflow-x: hidden;
+    position: relative;
+    /* Optional: Ensure Inter font is used if not handled by your main framework/config */
+    /* font-family: 'Inter', sans-serif; */
 }
+
+/* 2. Dynamic Background Effect */
+.dynamic-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -10;
+    opacity: 0.15;
+    /* Updated gradient colors to vibrant green/teal for the dark aesthetic */
+    background: radial-gradient(circle at 10% 20%, rgba(104, 204, 75, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(50, 150, 80, 0.2) 0%, transparent 50%);
+    background-size: 200% 200%;
+    animation: moveGradient 30s ease infinite alternate;
+}
+
+@keyframes moveGradient {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
+}
+
+/* 3. Core Theme Accent Classes */
+
+/* Text color for headlines and accents (Vibrant Data Green) */
+.accent-color {
+    color: #68CC4B;
+}
+
+/* Background color for buttons and key elements */
+.accent-bg {
+    background-color: #68CC4B;
+    box-shadow: 0 0 20px rgba(104, 204, 75, 0.5); /* Matching Green shadow */
+}
+
+/* Border color utility */
+.accent-border {
+    border-color: #68CC4B;
+}
+
+/* 4. CTA Button Hover Effect */
+.cta-button {
+    transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 10px 30px rgba(104, 204, 75, 0.4); /* Enhanced Green shadow on hover */
+    background-color: #55B53C; /* Slightly darker green on hover */
+}
+
+
+/* 5. Tailwind Overrides (If you need to ensure the custom green is used where you used 'cyan-500') */
+/* Note: In a real Tailwind setup, you should update your tailwind.config.js theme colors instead */
+.border-cyan-500 { border-color: #68CC4B !important; }
+.focus\:ring-cyan-500:focus { --tw-ring-color: #68CC4B !important; }
+.focus\:border-cyan-500:focus { border-color: #68CC4B !important; }
+.hover\:border-cyan-500\/50:hover { border-color: rgba(104, 204, 75, 0.5) !important; }
+.border-cyan-900\/50 { border-color: rgba(104, 204, 75, 0.5) !important; }
